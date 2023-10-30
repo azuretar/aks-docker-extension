@@ -20,6 +20,15 @@ export function App() {
     setResponse(JSON.stringify(result));
   };
 
+  const fetchAndDisplayResponseDocker = async () => {
+    const images = await ddClient.docker.listImages();
+    const titles = (images as any[]).map((image: any) => ({
+      Repository: image.RepoTags[0].split(':')[0],
+      Tag: image.RepoTags[0].split(':')[1]
+    }));
+    setResponse(JSON.stringify(titles));
+  };
+  
   return (
     <>
       <Typography variant="h3">Docker extension demo</Typography>
@@ -36,6 +45,9 @@ export function App() {
       <Stack direction="row" alignItems="start" spacing={2} sx={{ mt: 4 }}>
         <Button variant="contained" onClick={fetchAndDisplayResponse}>
           Call backend
+        </Button>
+        <Button variant="contained" onClick={fetchAndDisplayResponseDocker}>
+          List Docker Images
         </Button>
 
         <TextField
