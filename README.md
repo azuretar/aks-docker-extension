@@ -1,6 +1,8 @@
 # Azure Kubernetes Services
 
-This repository defines an example of a Docker extension. The files in this repository have been automatically generated as a result of running `docker extension init`, then changed to use dotnet C# as the backend.
+This repository defines an example of a Docker extension. The files in this repository have been automatically generated as a result of running `docker extension init`, then changed to use dotnet C# as the backend, using this example as reference [React + .NET 6 WebAPI](https://github.com/felipecruz91/dotnet-api-docker-extension)
+
+The generated image is at https://hub.docker.com/repository/docker/azuretar/aks-docker-extension/general
 
 This extension is composed of:
 
