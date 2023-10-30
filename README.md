@@ -1,11 +1,11 @@
 # Azure Kubernetes Services
 
-This repository defines an example of a Docker extension. The files in this repository have been automatically generated as a result of running `docker extension init`.
+This repository defines an example of a Docker extension. The files in this repository have been automatically generated as a result of running `docker extension init`, then changed to use dotnet C# as the backend.
 
 This extension is composed of:
 
-- A [frontend](./ui) app in React that makes a request to the `/hello` endpoint and displays the payload in Docker Desktop.
-- A [backend](./backend) container that runs an API in Go. It exposes the `/hello` endpoint which returns a JSON payload.
+- A [frontend](./ui) app in React that makes a request to the `/weatherforecast` endpoint and displays the payload in Docker Desktop.
+- A [backend](./backend) container that runs an API in DotNet C#. We have two buttons on the frontend to call weatherforecast backend API and also Docker CLI.
 
 > You can build your Docker Extension using your fav tech stack:
 >
@@ -76,7 +76,7 @@ Each subsequent click on the extension tab will also open Chrome Dev Tools. To s
 
 ### Backend development (optional)
 
-This example defines an API in Go that is deployed as a backend container when the extension is installed. This backend could be implemented in any language, as it runs inside a container. The extension frameworks provides connectivity from the extension UI to a socket that the backend has to connect to on the server side.
+This example defines an API in Dotnet C# that is deployed as a backend container when the extension is installed. This backend could be implemented in any language, as it runs inside a container. The extension frameworks provides connectivity from the extension UI to a socket that the backend has to connect to on the server side.
 
 Note that an extension doesn't necessarily need a backend container, but in this example we include one for teaching purposes.
 
