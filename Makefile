@@ -1,4 +1,4 @@
-IMAGE?=jorgearteiro/aks-docker-extension
+IMAGE?=azuretar/aks-docker-extension
 TAG?=latest
 
 BUILDER=buildx-multi-arch

@@ -18,6 +18,7 @@ RUN  --mount=type=cache,id=nuget,target=/root/.nuget/packages  \
      --packages /root/.nuget/packages \
      --runtime alpine-x64 \
      --self-contained true \
+     --no-cache /restore \
      /p:PublishTrimmed=true \
      /p:PublishSingleFile=true
 
