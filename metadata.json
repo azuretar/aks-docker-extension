@@ -3,14 +3,17 @@
   "vm": {
     "composefile": "docker-compose.yaml",
     "exposes": {
-      "socket": "backend.sock"
+      "socket": "ext.sock"
     }
   },
   "ui": {
     "dashboard-tab": {
-      "title": "Azure Kubernetes Services 2",
+      "title": "Azure Kubernetes Services",
       "src": "index.html",
-      "root": "ui"
+      "root": "ui",
+      "backend": {
+        "socket": "ext.sock"
+      }
     }
   }
 }

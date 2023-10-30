@@ -1,14 +1,25 @@
-FROM golang:1.19-alpine AS builder
-ENV CGO_ENABLED=0
-WORKDIR /backend
-COPY backend/go.* .
-RUN --mount=type=cache,target=/go/pkg/mod \
-    --mount=type=cache,target=/root/.cache/go-build \
-    go mod download
-COPY backend/. .
-RUN --mount=type=cache,target=/go/pkg/mod \
-    --mount=type=cache,target=/root/.cache/go-build \
-    go build -trimpath -ldflags="-s -w" -o bin/service
+# syntax=docker/dockerfile:1.4
+FROM mcr.microsoft.com/dotnet/sdk:6.0-alpine AS builder
+WORKDIR /source
+
+# COPY backend/* .
+COPY backend/**/*.csproj .
+RUN for file in $(ls *.csproj); do mkdir -p ${file%.*}/ && mv $file ${file%.*}/; done
+COPY backend/MySolution.sln .
+
+RUN --mount=type=cache,id=nuget,target=/root/.nuget/packages \
+    dotnet restore MySolution.sln \
+    --runtime alpine-x64
+
+COPY backend .
+RUN  --mount=type=cache,id=nuget,target=/root/.nuget/packages  \
+     dotnet publish -c Release -o /app \
+     --no-restore \
+     --packages /root/.nuget/packages \
+     --runtime alpine-x64 \
+     --self-contained true \
+     /p:PublishTrimmed=true \
+     /p:PublishSingleFile=true
 
 FROM --platform=$BUILDPLATFORM node:18.12-alpine3.16 AS client-builder
 WORKDIR /ui
@@ -22,7 +33,7 @@ RUN --mount=type=cache,target=/usr/src/app/.npm \
 COPY ui /ui
 RUN npm run build
 
-FROM alpine
+FROM mcr.microsoft.com/dotnet/runtime-deps:6.0-alpine
 LABEL org.opencontainers.image.title="Azure Kubernetes Services" \
     org.opencontainers.image.description="Azure Kubernetes Services Extension to manage kubernetes on Azure" \
     org.opencontainers.image.vendor="AzureTar" \
@@ -35,9 +46,9 @@ LABEL org.opencontainers.image.title="Azure Kubernetes Services" \
     com.docker.extension.categories="" \
     com.docker.extension.changelog=""
 
-COPY --from=builder /backend/bin/service /
+COPY --from=builder /app .
 COPY docker-compose.yaml .
 COPY metadata.json .
 COPY docker.svg .
 COPY --from=client-builder /ui/build ui
-CMD /service -socket /run/guest-services/backend.sock
+CMD ./MyAPI 
