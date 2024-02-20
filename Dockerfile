@@ -19,7 +19,7 @@ RUN  --mount=type=cache,id=nuget,target=/root/.nuget/packages  \
      --runtime linux-musl-x64 \
      --self-contained true \
      --no-cache /restore \
-     /p:PublishTrimmed=true \
+     #/p:PublishTrimmed=true \ #Not working in dotnet8
      /p:PublishSingleFile=true
 
 FROM --platform=$BUILDPLATFORM node:18.12-alpine3.16 AS client-builder
