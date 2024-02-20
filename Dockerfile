@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1.4
-FROM mcr.microsoft.com/dotnet/sdk:6.0-alpine AS builder
+FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS builder
 WORKDIR /source
 
 # COPY backend/* .
@@ -9,17 +9,17 @@ COPY backend/MySolution.sln .
 
 RUN --mount=type=cache,id=nuget,target=/root/.nuget/packages \
     dotnet restore MySolution.sln \
-    --runtime alpine-x64
+    --runtime linux-musl-x64
 
 COPY backend .
 RUN  --mount=type=cache,id=nuget,target=/root/.nuget/packages  \
      dotnet publish -c Release -o /app \
      --no-restore \
      --packages /root/.nuget/packages \
-     --runtime alpine-x64 \
+     --runtime linux-musl-x64 \
      --self-contained true \
      --no-cache /restore \
-     /p:PublishTrimmed=true \
+     #/p:PublishTrimmed=true \ #Not working in dotnet8
      /p:PublishSingleFile=true
 
 FROM --platform=$BUILDPLATFORM node:18.12-alpine3.16 AS client-builder
@@ -34,7 +34,7 @@ RUN --mount=type=cache,target=/usr/src/app/.npm \
 COPY ui /ui
 RUN npm run build
 
-FROM mcr.microsoft.com/dotnet/runtime-deps:6.0-alpine
+FROM mcr.microsoft.com/dotnet/runtime-deps:8.0-alpine
 LABEL org.opencontainers.image.title="Azure Kubernetes Services" \
     org.opencontainers.image.description="Azure Kubernetes Services Extension to manage kubernetes on Azure" \
     org.opencontainers.image.vendor="AzureTar" \

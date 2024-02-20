@@ -8,7 +8,7 @@
   },
   "ui": {
     "dashboard-tab": {
-      "title": "Azure Kubernetes Services",
+      "title": "Azure Kubernetes Services 2",
       "src": "index.html",
       "root": "ui",
       "backend": {
