@@ -1,0 +1,25 @@
+﻿@page "/"
+
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+@code {
+    private string? message;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await JSHost.ImportAsync("CallJavaScript1", 
+            "../Components/Pages/CallJavaScript1.razor.js");
+
+    }
+
+    private void IncrementCount()
+    {
+        message = GetWelcomeMessage();
+    }
+}

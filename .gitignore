@@ -3,3 +3,6 @@ ui/build
 backend/**/bin
 backend/**/obj
 backend/**/.vs
+aksextweb/**/bin
+aksextweb/**/obj
+aksextweb/**/.vs

@@ -5,18 +5,24 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyAPI", "MyAPI\MyAPI.csproj", "{340D8665-BD36-493B-A40E-9E711A3DB515}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aksextweb", "..\aksextweb\aksextweb.csproj", "{0A307710-1FD9-407F-8613-6ABDFF10409F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{340D8665-BD36-493B-A40E-9E711A3DB515}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{340D8665-BD36-493B-A40E-9E711A3DB515}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{340D8665-BD36-493B-A40E-9E711A3DB515}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{340D8665-BD36-493B-A40E-9E711A3DB515}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A307710-1FD9-407F-8613-6ABDFF10409F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A307710-1FD9-407F-8613-6ABDFF10409F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A307710-1FD9-407F-8613-6ABDFF10409F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A307710-1FD9-407F-8613-6ABDFF10409F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal
